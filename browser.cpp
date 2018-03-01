@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 	while(*s && ((*s!='\n') || (*(s+1)!='\n'))) {
 		s++;
 	}
-	if(*s=='\0) {
+	if(*s=='\0') {
 		printf("Errore ricezione: %s\n",rspn);
 	   	return -4;
 	}
