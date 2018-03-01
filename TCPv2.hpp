@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <list>
+#include <algorithm>
 #include "Address.hpp"
 #include "errore.h"
 
@@ -43,6 +44,7 @@ private:  int conn_id;
           bool fuffa;
 public:   Connection(int conn_id, bool fuffa);
           ~Connection(); /* API: shutdown() */
+	  int get_conn_id();
           bool invia(char* msg);
           bool invia_raw(void* buffer, int length); /* API: send() */
           char* ricevi();
@@ -51,6 +53,9 @@ public:   Connection(int conn_id, bool fuffa);
 Connection::Connection(int conn_id, bool fuffa){
           this->fuffa = fuffa;
           this->conn_id = conn_id;
+}
+int Connection::get_conn_id() {
+	return this->conn_id;	
 }
 bool Connection::invia(char* msg){
 	return invia_raw(msg,strlen(msg)+1);
@@ -120,7 +125,15 @@ void ServerTCP::invia_a_tutti(char* msg) {
                     c.invia(msg);
 }
 void ServerTCP::disconnetti(Connection connessione){
-          connessioni.remove(connessione);
+        //connessioni.remove(connessione);
+	std::list<Connection*>::iterator i = connessioni.begin();
+	while (i != connessioni.end())
+	{
+		if(i.get_conn_id() == connessione.get_conn_id()) {
+			connessioni.erase(i); 
+		}
+		i++;
+	}
 }
 //-------------------------------------------------------------------------------------
 class ClientTCP: public SocketTCP{
