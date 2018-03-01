@@ -60,6 +60,7 @@ int main(int argc, char* argv[]) {
 	//Scrittura html su file
 	fprintf(out,"%s\n",s);
 	//Chiusura programma
+	close(out);
 	free(answer);
 	delete(myself);
 	return 0;
