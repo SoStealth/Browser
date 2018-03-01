@@ -129,7 +129,7 @@ void ServerTCP::disconnetti(Connection connessione){
 	std::list<Connection*>::iterator i = connessioni.begin();
 	while (i != connessioni.end())
 	{
-		if(i.get_conn_id() == connessione.get_conn_id()) {
+		if(std::list<i>.get_conn_id() == connessione.get_conn_id()) {
 			connessioni.erase(i); 
 		}
 		i++;
