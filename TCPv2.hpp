@@ -125,14 +125,10 @@ void ServerTCP::invia_a_tutti(char* msg) {
                     c.invia(msg);
 }
 void ServerTCP::disconnetti(Connection connessione){
-        //connessioni.remove(connessione);
-	std::list<Connection*>::iterator i = connessioni.begin();
-	while (i != connessioni.end())
-	{
-		if(std::list<i>.get_conn_id() == connessione.get_conn_id()) {
-			connessioni.erase(i); 
+	for(Connection c : connessioni) {
+		if(c.get_conn_id() == connessione.get_conn_id()) {
+			connessioni.erase(c); 
 		}
-		i++;
 	}
 }
 //-------------------------------------------------------------------------------------
