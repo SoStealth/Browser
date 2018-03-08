@@ -4,16 +4,7 @@
 #define RESPONSE "HTTP/1.1 200 OK\n"\
 	"Date: Wed, 19 Apr 2017 16:34:20 GMT\n"\
 	"Content-Type: text/html; charset=UTF-8\n\n" \
-	"<!DOCTYPE html>\n" \
-	"<html class=\"client-nojs\" lang=\"it\" dir=\"ltr\">\n" \
-	"<head>\n" \
-	"<meta charset=\"UTF-8\"/>\n" \
-	"<title>Wikipedia, l'enciclopedia libera</title>\n" \
-	"</head>\n" \
-	"<body>\n" \
-	"\n" \
-	"</body>\n" \
-	"</html>"
+#define REQUEST_FOOTER "\n HTTP"
 
 int main(int argc, char* argv[]) {
 	if(argc!=3) {
@@ -26,10 +17,12 @@ int main(int argc, char* argv[]) {
 	
 	ServerTCP myself(port,false);
 	Connection connection = myself.accetta();
-	char* rqst = myself.ricevi();
+	char* rqst = connection.ricevi();
 	if(rqst==NULL) {
 		errore(-2,"ServerTCP.ricevi()\n");
 	}
+	
+	
 	
 	if(connection.invia(RESPONSE)) {
 		errore(-3,"Connection.invia()\n");	
