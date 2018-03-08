@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define REQUEST_HEADER "GET "
-#define REQUEST_FOOTER " HTTP/1.1\n" \
+#define REQUEST_FOOTER "\n HTTP/1.1\n" \
 			"User-Agent: Mozilla/5.0\n\n"
 #define HTTP_PORT 80
 #define MAX_STR 4096
